@@ -1,3 +1,19 @@
+<script context="module">
+	import { AuthStore } from '$lib/stores';
+	import { get } from 'svelte/store';
+
+	export async function load({ fetch, session, props }) {
+		if (!session.loggedIn) {
+			return {
+				status: 303,
+				redirect: '/login'
+			};
+		}
+
+		return { props };
+	}
+</script>
+
 <script lang="ts">
 	import type { ClientEmpty } from '$lib/types';
 	import NewClientForm from '$lib/components/NewClientForm.svelte';
